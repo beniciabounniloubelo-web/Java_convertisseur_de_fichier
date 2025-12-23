@@ -1,13 +1,17 @@
-import java.util.*;
+import java.lang.Comparable;
+import java.util.Set;
+import java.util.Queue;
+import java.util.PriorityQueue;
+import java.util.Map;
 
 public class Huffman {
     
     public void Codage (Set<TabFreq> tf){
         Queue<Noeud> unefile=new PriorityQueue<>(); //une file de noeuds
         
-        for (TabFreq entree : tf){
+        for (Map.Entry<Integer, Integer> entry : tf.getTab().entrySet()){ //on parcours le dico
             if (entree.getValue()>0){
-                Noeud feuille=new Noeud(entry.getKey(), entry.getValue()); //prend en parametre les donnees d'une entree de la table de frequence
+                Noeud feuille=new Noeud(entree.getKey(), entree.getValue()); //prend en parametre les donnees d'une entree de la table de frequence
                 unefile.add(feuille);
             }
         }
