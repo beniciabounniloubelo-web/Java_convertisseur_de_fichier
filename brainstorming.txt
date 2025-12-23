@@ -1,0 +1,67 @@
+<>
+
+//table de frequence
+
+//huffman
+file utilisée pour construire l'arbre
+
+on cree une file
+parcourir le dictionnaire
+si frequence == 0 {
+on fait rien } sinon {
+new noeud (ici une feuille) avec comme caractérisques enfant droit, enfant gauche et frequence
+.add le noeud dans la file ??? -- qui tri par frequence (- frequence, + haute priorité)
+}
+
+sur la file
+boucle while (file.size() > 1) {
+int a = 0;
+int b = 0;
+a = file.poll() //variables qui recupere les 2 premieres valeurs de la file
+b = file.poll() 
+new noeud qui 
+- prend a et b en enfant du noeud
++ sa frequence = afrequence+bfrequence
+file.add le nv noeud a la file
+} 
+
+on cree un dictionnaire TreeMap
+boucle while (??) 
+??? -- on récupère un noeud (comment parcourir l'arbre?)
+si pas d'enfant (donc feuille) { 
+on cree un tableau vide (ou arraylist)
+puis on met la valeur de la feuille dans une variable 
+on boucle while (??){
+??? -- on parcourt l'arbre du haut vers le bas // construction du code au moment où de descendre dans l’arbre
+stocke soit 0 soit 1 dans le tableau (ou arraylist) } => on trouve son code final qui est contenu dans le tableau a la fin de cette boucle
+on met dans le dico la variable comme clé et le tableau en valeur
+)
+
+//table canonique
+
+//format PIF
+-l'en-tête
+taille totale: 4 octets
+dont 2 premiers = largeur de l'image
+dont 2 derniers = hauteur de l'image
+
+-la section des tables - codes canoniques
+taille totale: 768 octets
+1) table rouge
+2) table vert
+3) table bleu
+taille d'1 table: 256 octets
+1 octet = longueur d'une valeur ; ex: 
+Octet 1 → longueur du code pour la valeur 0
+Octet 2 → longueur du code pour la valeur 1
+…
+Octet 256 → longueur du code pour la valeur 255
+!!! - si octet avec 0 = valeur pas presente = pas de code
+
+-la section des pixels - codes canoniques
+1) Tu lis le code canonique pour R, puis pour G, puis pour B.
+2) Tu décodes chaque code canonique pour retrouver la valeur numérique de chaque composante (souvent entre 0 et 255).
+3) Ensuite tu peux former le triplet RGB : (R, G, B).
+ATTENTION - ???: 
+nb de bit variable = un octet peut avoir les donnees de plusieurs pixels (3 max si certains pixels peuvent etre codés sur moins de 8 bits) 
+ET un pixel peut étaler ses données sur plusieurs dizaines d'octets max sa valeur a un code super long 
