@@ -10,6 +10,12 @@ public class Tab{
         this.tab = tab;
     }
 
+    /*
+    public void setTab(Map<Integer, Integer> tab){
+        this.tab=tab;
+    }
+    */
+
     public Map<Integer, Integer> getTab() {
         return tab;
     }
