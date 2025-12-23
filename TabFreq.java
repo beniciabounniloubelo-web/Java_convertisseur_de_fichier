@@ -8,7 +8,6 @@ import java.awt.Color;
 public class TabFreq {
 
     public void Remplir(Tab tableau, BufferedImage img, int x, int y, String s){ //on rentre l'image, les dimensions de l'image + de quelle couleur on veut la table de frequence
-        Map<Integer, Integer> tab = tableau.getTab();    //???
 
         for (int i=0; i<255; i++){ //pour les 256 valeurs
             int o=0; //represente le nombre de fois qu'apparait valeur i
@@ -41,7 +40,8 @@ public class TabFreq {
                     }
                 }   
             }
-        tab.put(i,o); //a la fin on ajoute la frequence au tableau de la couleur - ca nous donne une entree
+        tableau.getTab().put(i,o); //a la fin on ajoute la frequence au tableau de la couleur - ca nous donne une entree
+        //on recupere le tableau avec getTab et dedans on rajoute une nvelle entree
         }
     }
 
