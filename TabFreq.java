@@ -7,13 +7,13 @@ import java.awt.Color;
 
 public class TabFreq {
 
-    public void Remplir(Tab tableau, BufferedImage img, int x, int y, String s){ //on rentre l'image, les dimensions de l'image + de quelle couleur on veut la table de frequence
+    public void Remplir(Tab tableau, BufferedImage img, String s){ //on rentre l'image, de quelle couleur on veut la table de frequence
 
         for (int i=0; i<255; i++){ //pour les 256 valeurs
             int o=0; //represente le nombre de fois qu'apparait valeur i
 
-            for (int L=0; L<x; L++){ //parcours en largeur de l'image
-                for (int h=0; h<y; h++){ //parcours hauteur de l'image
+            for (int L=0; L<img.getWidth(); L++){ //parcours en largeur de l'image
+                for (int h=0; h<img.getHeight(); h++){ //parcours hauteur de l'image
                     int rgb = img.getRGB(L,h); //on recupere rgb d'un pixel
                     Color couleur=new Color(rgb); 
                     //il n'y a que l'objet Color qui pourra decoder le nb rgb et le traduire en couleur

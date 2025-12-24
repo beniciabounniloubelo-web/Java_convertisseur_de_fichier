@@ -39,11 +39,27 @@ on met dans le dico la variable comme clé et le tableau en valeur
 
 //table canonique
 
+//prend en argument un tableau issue du codage de huffman
+public void TabCanon (un treemap => on change en hashmap pour pouvoir reorganiser OU on passe treemap en argument a hashmap)
+
+//avec comparable ?
+//on recupere la longueur du code du via une methode de la javadoc
+.getValue().length
+on tri par longueur ?
+on tri par valeur (donc tri à partir de la clé) ?
+
+on parcourt le nv HashMap 
+pour une entree - foreach
+on prend sa valeur, soit le tableau - .getValue()
+on recupere sa longueur via une methode de la javadoc - .getValue().length
+on fait +1 en binaire 
+puis on rajoutes des zéros jusqu'à la longueur souhaitée
+
 //format PIF
 -l'en-tête
 taille totale: 4 octets
-dont 2 premiers = largeur de l'image
-dont 2 derniers = hauteur de l'image
+dont 2 premiers = largeur de l'image en pixel
+dont 2 derniers = hauteur de l'image en pixel 
 
 -la section des tables - codes canoniques
 taille totale: 768 octets
@@ -51,7 +67,8 @@ taille totale: 768 octets
 2) table vert
 3) table bleu
 taille d'1 table: 256 octets
-1 octet = longueur d'une valeur ; ex: 
+1 octet = longueur d'une valeur ; 
+ex: 
 Octet 1 → longueur du code pour la valeur 0
 Octet 2 → longueur du code pour la valeur 1
 …
@@ -59,9 +76,9 @@ Octet 256 → longueur du code pour la valeur 255
 !!! - si octet avec 0 = valeur pas presente = pas de code
 
 -la section des pixels - codes canoniques
-1) Tu lis le code canonique pour R, puis pour G, puis pour B.
-2) Tu décodes chaque code canonique pour retrouver la valeur numérique de chaque composante (souvent entre 0 et 255).
-3) Ensuite tu peux former le triplet RGB : (R, G, B).
+1) lecture code canonique pour R, puis G, puis B
+2) decode chaque code canonique pour retrouver la valeur numerique de chaque composante (souvent entre 0 et 255)
+3) formation du triplet RGB : (R, G, B)
 ATTENTION - ???: 
-nb de bit variable = un octet peut avoir les donnees de plusieurs pixels (3 max si certains pixels peuvent etre codés sur moins de 8 bits) 
-ET un pixel peut étaler ses données sur plusieurs dizaines d'octets max sa valeur a un code super long 
+nb de bit variable = un octet peut avoir les donnees de plusieurs pixels (3 max si certains pixels peuvent etre codes sur moins de 8 bits) 
+ET un pixel peut etaler ses donnees sur plusieurs dizaines d'octets max sa valeur a un code super long 

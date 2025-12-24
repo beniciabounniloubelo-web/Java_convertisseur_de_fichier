@@ -21,6 +21,7 @@ public class Huffman {
             }
         }
 
+//pas sure ???
         while (unefile.size()>1){ //il doit y avoir au moins 2 elements ds la file
         Noeud e1;
         Noeud e2;
@@ -29,6 +30,7 @@ public class Huffman {
         long newfrq = e1.getFrequence() + e2.getFrequence();
         Noeud node=new Noeud(newfrq, e1, e2);
         unefile.add(node);
+        //LE TRI PAR FREQUENCE ?? cf PriorityQueue
         }
 
     }

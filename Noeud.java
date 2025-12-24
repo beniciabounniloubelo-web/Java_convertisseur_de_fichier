@@ -24,7 +24,7 @@ public class Noeud implements Comparable<Noeud>{
             }
 
         
-           // avec Comparable<T> sert a trier par frequence (- frequence, + haute priorité)
+           // avec Comparable<T> sert a trier par frequence (- frequence, + haute priorité) / voir si possible de faire uniquement avec PQ
             @Override
             public int compareTo(Noeud autre) {
             return Long.compare(this.frequence, autre.frequence); // on compare la frequence actuelle avec cette qui vient d'etre passee en parametre
