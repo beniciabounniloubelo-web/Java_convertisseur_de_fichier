@@ -4,6 +4,8 @@ import java.awt.image.*;
 import java.awt.Color;
 
 //BufferedImage img = ImageIO.read(new File "nomdelimage.pif"); //on charge l'image
+//comme dans Noeud
+//on prend qu'une image en argument et on cree ici les 3 tables (qui vont etre return par la suite)
 
 public class TabFreq {
 
