@@ -5,14 +5,13 @@ import java.awt.Color;
 
 //BufferedImage img = ImageIO.read(new File "nomdelimage.pif"); //on charge l'image
 //comme dans Noeud
-//on prend qu'une image en argument et on cree ici les 3 tables (qui vont etre return par la suite)
+//on cree ici les 3 tables (qui vont etre return par la suite)
 
 public class TabFreq {
 
-    public void Remplir(Tab tableau, BufferedImage img, String s){ //on rentre l'image, de quelle couleur on veut la table de frequence
+    public void Remplir(BufferedImage img){
+        int[][] tableau = new int[255][3];
 
-        for (int i=0; i<255; i++){ //pour les 256 valeurs
-            int o=0; //represente le nombre de fois qu'apparait valeur i
 
             for (int L=0; L<img.getWidth(); L++){ //parcours en largeur de l'image
                 for (int h=0; h<img.getHeight(); h++){ //parcours hauteur de l'image
@@ -20,31 +19,13 @@ public class TabFreq {
                     Color couleur=new Color(rgb); 
                     //il n'y a que l'objet Color qui pourra decoder le nb rgb et le traduire en couleur
                     
-                    switch (s) {
-                        case "r":
-                            if (couleur.getRed() == i){ //on verifie si l'intensite de rouge correspond a la valeur actuelle
-                            o++;
-                            }
-                            break;
-                        case "g":
-                            if (couleur.getGreen() == i){ //on verifie si l'intensite de vert correspond a la valeur actuelle
-                            o++;
-                            }
-                            break;
-                        case "b":
-                            if (couleur.getBlue() == i){ //on verifie si l'intensite de bleu correspond a la valeur actuelle
-                            o++;
-                            }
-                            break;
-                        default:
-                            System.out.println("Cette chaine de caractere n'est pas reconnue.");
-                            break;
-                    }
+                        tableau[couleur.getRed()][0]++; //on met a jour au fur et a mesure la frequence au tableau de la couleur
+                        tableau[couleur.getGreen()][0]++;
+                        tableau[couleur.getBlue()][0]++;
+
                 }   
             }
-        tableau.getTab().put(i,o); //a la fin on ajoute la frequence au tableau de la couleur - ca nous donne une entree
-        //on recupere le tableau avec getTab et dedans on rajoute une nvelle entree
-        }
+
     }
 
 }
