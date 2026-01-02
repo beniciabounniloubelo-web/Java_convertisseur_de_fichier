@@ -24,7 +24,7 @@ public class Noeud implements Comparable<Noeud>{
             }
 
         
-           // avec Comparable<T> sert a trier par frequence (- frequence, + haute priorité) / voir si possible de faire uniquement avec PQ
+            // avec Comparable<T> sert a trier par frequence (- frequence, + haute priorité) / voir si possible de faire uniquement avec PQ
             @Override
             public int compareTo(Noeud autre) {
             return Long.compare(this.frequence, autre.frequence); // on compare la frequence actuelle avec cette qui vient d'etre passee en parametre
@@ -32,6 +32,18 @@ public class Noeud implements Comparable<Noeud>{
 
             public long getFrequence(){
                 return frequence;
+            }
+
+            public Noeud getValeur(){
+                return valeur;
+            }
+
+            public Noeud getGauche(){
+                return gauche;
+            }
+
+            public Noeud getDroit(){
+                return droit;
             }
 }
 
