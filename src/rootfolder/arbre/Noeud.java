@@ -10,22 +10,22 @@ public class Noeud implements Comparable<Noeud>{
             private Noeud gauche; //enfant de gauche
             private Noeud droit; //enfant de droite
 
-            Noeud(int valeur, long frequence) { //c'est une feuille
-                this.valeur = valeur;
-                this.frequence = frequence;
+            Noeud(int v, long f) { //c'est une feuille
+                this.valeur = v;
+                this.frequence = f;
                 this.gauche = null;
                 this.droit = null;
             }
 
-            Noeud(long frequence, Noeud gauche, Noeud droit) { //c'est un noeud interne
+            Noeud(long f, Noeud g, Noeud d) { //c'est un noeud interne
                 this.valeur = -1; //donc pas de pixel associe
-                this.frequence = frequence;
-                this.gauche = gauche;
-                this.droit = droit;
+                this.frequence = f;
+                this.gauche = g;
+                this.droit = d;
             }
 
 
-            // avec Comparable<T> sert a trier par frequence (- frequence, + haute priorité) / voir si possible de faire uniquement avec PQ
+            // avec Comparable<T> sert a trier par frequence (- frequence, + haute priorité)
             @Override
             public int compareTo(Noeud autre) {
             return Long.compare(this.frequence, autre.frequence); // on compare la frequence actuelle avec cette qui vient d'etre passee en parametre

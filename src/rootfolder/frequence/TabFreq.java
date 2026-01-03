@@ -9,7 +9,7 @@ import java.awt.Color;
 
 public class TabFreq {
 
-    public static TroisCouleurs Remplir(BufferedImage img){
+    public static TroisCouleurs RemplirTabFreq(BufferedImage img){
         int[] tableau1 = new int[256]; //rouge
         int[] tableau2 = new int[256]; //vert
         int[] tableau3 = new int[256]; //bleu

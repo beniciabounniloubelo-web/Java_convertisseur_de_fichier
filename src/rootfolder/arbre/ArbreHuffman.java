@@ -26,6 +26,7 @@ public class ArbreHuffman {
         }
         //a la fin de l'etape arbre = racine
         return unefile.poll();
+
     }
 
 /*Note:

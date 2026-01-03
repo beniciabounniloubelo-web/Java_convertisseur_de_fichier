@@ -9,10 +9,6 @@ public class ParcoursArbre{
     //methode iterative - DFS
     public static void dfsRecursive (Noeud NoeudActuel, String actualCode, Map<Integer, String> tabCode) {
 
-        if (NoeudActuel == null){
-            return;
-        }
-
         if (NoeudActuel.getGauche() == null && NoeudActuel.getDroit() == null){
             int valeur = NoeudActuel.getValeur();
             tabCode.put(valeur, actualCode); //ajoute le code trouve pour la valeur de la feuille
