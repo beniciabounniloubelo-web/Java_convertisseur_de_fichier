@@ -1,4 +1,4 @@
-package rootfolder.arbre;
+package arbre;
 
 import java.util.Map;
 import java.util.HashMap;

@@ -1,4 +1,4 @@
-package rootfolder.arbre;
+package arbre;
 
 import java.util.Queue;
 import java.util.PriorityQueue;
