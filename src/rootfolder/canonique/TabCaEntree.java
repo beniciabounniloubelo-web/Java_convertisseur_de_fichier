@@ -1,4 +1,4 @@
-package canonique;
+package rootfolder.canonique;
 
 public class TabCaEntree implements Comparable<TabCaEntree>{
             private int valeur; //valeur du pixel

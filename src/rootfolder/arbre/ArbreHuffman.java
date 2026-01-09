@@ -1,11 +1,17 @@
-package arbre;
+package rootfolder.arbre;
 
 import java.util.Queue;
 import java.util.PriorityQueue;
 
+/*Note:
+1. construction de l’arbre avec une file
+2. MAIS file n'est pas l’arbre
+3. file ne sert qu’à manipuler/construire/parcourir l’arbre mais c'est les liens entre les noeuds qui SONT l'arbre
+*/
+
 public class ArbreHuffman {
 
-    public static Noeud construireArbre(int[] tf){ //n'importe quel tableau de frequence
+    public static Noeud construireArbre(int[] tf){ //pour n'importe quel tableau de frequence
 
         //etape 1: creation de la file
         Queue<Noeud> unefile=new PriorityQueue<>(); //une file de noeuds
@@ -29,9 +35,4 @@ public class ArbreHuffman {
 
     }
 
-/*Note:
-1. construction de l’arbre avec une file
-2. MAIS file n'est pas l’arbre
-3. file ne sert qu’à manipuler/construire/parcourir l’arbre mais c'est les liens entre les noeuds qui SONT l'arbre
-*/
 }

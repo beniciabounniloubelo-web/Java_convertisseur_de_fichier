@@ -1,4 +1,4 @@
-package frequence;
+package rootfolder.frequence;
 
 //objet pour acceder au 3 tableaux de couleur
 

@@ -1,28 +1,40 @@
 package rootfolder;
 
-import frequence.*;
+import rootfolder.frequence.*;
+import rootfolder.canonique.*;
+import rootfolder.arbre.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
 import java.awt.image.BufferedImage;
-
-/* Dans un Main
-BufferedImage img = ImageIO.read(new File "nomdelimage.pif"); //on chargera l'image 
-int[] tableFreqRouge=TabFreq.RemplirTabFreq(image).getRouge(); //dans un main pour avoir la table de frequence du rouge
-MHuffman.Encoder(tableFreqRouge); //prend une table de frequence et donne une table de code - le tt pour une seule couleur
-MCanonique.EncoderEncore(MHuffman.Encoder(tableFreqRouge)); //prend une table code et donne une table canonique - le tt pour une couleur
-*/
+import java.util.Map;
+import java.io.File;
+import java.io.IOException;
+import java.io.DataOutputStream;
+import java.io.FileOutputStream;
 
 public class PrintImage {
 
     public static void main(String[] args) {
             //on cree l'objet ChargementImage
-            ChargementImage exo = new ChargementImage(768, 1024); 
+            ChargementImage image = new ChargementImage();
+            
             // on charge l'image
-            BufferedImage img = exo.chargedImage("image.bin");
-
-            //on cree sa table de frequence
-            //TroisCouleurs tc = TabFreq.RemplirTabFreq(img);
+            BufferedImage img = null;
+            if (args.length >= 1){
+            img = image.chargedImageCompressee(args[0]); 
+            } else {
+                JFileChooser choose = new JFileChooser(new File("."));
+                choose.setDialogTitle("Choisissez une image: ");
+                int res = choose.showOpenDialog(null);
+                if(res == JFileChooser.APPROVE_OPTION){
+                    if(!choose.getSelectedFile().isDirectory()){
+                        img = image.chargedImageCompressee(choose.getSelectedFile());
+                    }
+                }
+            }
+            BufferedImage imgbis = img;
 
             //on veut recuperer table de frequence pour chaque couleur
             int[] tableFreqRouge=TabFreq.RemplirTabFreq(img).getRouge();
@@ -30,28 +42,130 @@ public class PrintImage {
             int[] tableFreqBleu=TabFreq.RemplirTabFreq(img).getBleu();
 
             //on recupere table de codes pour chaque couleur
-            MHuffman.Encoder(tableFreqRouge);
-            MHuffman.Encoder(tableFreqVert);
-            MHuffman.Encoder(tableFreqBleu);
+            Map<Integer, String> tableCodeRouge = MHuffman.Encoder(tableFreqRouge);
+            Map<Integer, String> tableCodeVert = MHuffman.Encoder(tableFreqVert);
+            Map<Integer, String> tableCodeBleu = MHuffman.Encoder(tableFreqBleu);
 
             //on recupere table canonique pour chaque couleur
-            MCanonique.EncoderEncore(MHuffman.Encoder(tableFreqRouge));
-            MCanonique.EncoderEncore(MHuffman.Encoder(tableFreqVert));
-            MCanonique.EncoderEncore(MHuffman.Encoder(tableFreqBleu));
+            Map<Integer, String> tableCanoRouge = MCanonique.EncoderEncore(tableCodeRouge);
+            Map<Integer, String> tableCanoVert = MCanonique.EncoderEncore(tableCodeVert);
+            Map<Integer, String> tableCanoBleu = MCanonique.EncoderEncore(tableCodeBleu);
 
             // on cree une fenetre
-            JFrame frame = new JFrame("on affiche !");
-            frame.setSize(img.getWidth(), img.getHeight()); 
+            JFrame frame = new JFrame("Convertisseur");
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+ 
+            //onglet IMAGE---------------------------------------
+            JLabel imageaafficher = new JLabel(new ImageIcon(img));
+            JButton bouton = new JButton("Convertir");
+            bouton.addActionListener(new ActionListener(){
+                @Override
+                public void actionPerformed(ActionEvent e){ //blablabla  pour convertir
 
-            // on ajoute JLabel a la fenetre
-            JLabel label = new JLabel(new ImageIcon(img));
-            frame.add(label);
-            frame.pack(); // ajuste la fenetre a la taille de l'image
-            //frame.setLocationRelativeTo(null);    // centre la fenetre au milieu de lecran
+                    File newfichierpif = null;
+                    //on recupere nom du nv fichier--------------------------
+                    if (args.length >= 2){
+                        newfichierpif = new File(args[1]);
 
+                        // Ajouter l'extension .pif au besoin
+                        if (!newfichierpif.getName().endsWith(".pif")) {
+                            newfichierpif = new File(newfichierpif.getAbsolutePath() + ".pif");
+                        }
+                    } /*else if (args.length >= 1) {
+                            JOptionPane.showMessageDialog(frame, "Rentrez en deuxieme argument un nom pour le nouveau fichier");
+                    }*/
+                    if (newfichierpif == null) {
+                        JFileChooser choose = new JFileChooser(new File("."));
+                        choose.setDialogTitle("Choisissez l'emplacement du fichier .pif");
+                        int res = choose.showSaveDialog(null);
+                        if (res == JFileChooser.APPROVE_OPTION) {
+                            newfichierpif = choose.getSelectedFile();
+                            if (!newfichierpif.getName().endsWith(".pif")) {
+                                newfichierpif = new File(newfichierpif.getAbsolutePath() + ".pif");
+                            }
+                        } else {
+                            JOptionPane.showMessageDialog(frame, "Aucun fichier de sortie choisi");
+                            System.exit(0);
+                        }
+                    }
+
+                    //creation du fichier-------------------------
+                    try {
+                        if (!newfichierpif.exists()) {
+                            newfichierpif.createNewFile();
+                            JOptionPane.showMessageDialog(frame, "Fichier cree avec succes !");
+                        } else {
+                            JOptionPane.showMessageDialog(frame, "Le fichier existe deja");
+                        }
+                    } catch (IOException exc) {
+                        exc.printStackTrace();
+                        JOptionPane.showMessageDialog(null, "Erreur lors de la creation du fichier !");
+                    }
+
+                    //on rentre dans la conversion la !!
+                    PifCreator pifFile= new PifCreator(imgbis, newfichierpif, tableCanoRouge, tableCanoVert, tableCanoBleu);
+                    pifFile.ecrirePif();
+                }
+            });
+
+            JPanel pourimage = new JPanel();
+            pourimage.setLayout(new BorderLayout());
+            pourimage.add(imageaafficher, BorderLayout.NORTH); //ajout de l'image dans le contenant 
+            pourimage.add(bouton, BorderLayout.SOUTH); //un JListener de bouton
+
+            //onglets autres---------------------------------------
+            JPanel pourtabfreq=new JPanel(); //contenant des tables de frequence
+            JPanel tabfreqrouge=new JPanel(); //contenant pour chacune de nos trois tables de frequence
+            JPanel tabfreqvert=new JPanel();
+            JPanel tabfreqbleu=new JPanel();
+
+            tabfreqrouge.add(AfficherTabFreq.affichage(tableFreqRouge, "Rouge")); //pour tables frequence
+            tabfreqvert.add(AfficherTabFreq.affichage(tableFreqVert, "Vert"));
+            tabfreqbleu.add(AfficherTabFreq.affichage(tableFreqBleu, "Bleu"));
+            //dans notre contenant pour les tables de frequences on met tout
+            pourtabfreq.add(new JLabel("Tables de frequence de l'image")); //afficher titre de la partie
+            pourtabfreq.add(tabfreqrouge); //on les ajoutes a la section/panel tab de freq
+            pourtabfreq.add(tabfreqvert);
+            pourtabfreq.add(tabfreqbleu);
+
+            JPanel pourtabcode=new JPanel(); //pour tables code
+            JPanel tabcoderouge=new JPanel();
+            JPanel tabcodevert=new JPanel();
+            JPanel tabcodebleu=new JPanel();
+
+            tabcoderouge.add(AfficherTabCode.affichage(tableCodeRouge, "Rouge"));
+            tabcoderouge.add(AfficherTabCode.affichage(tableCodeRouge, "Vert"));
+            tabcoderouge.add(AfficherTabCode.affichage(tableCodeRouge, "Bleu"));
+            pourtabcode.add(new JLabel("Tables de codes de l'image"));
+            pourtabcode.add(tabcoderouge);
+            pourtabcode.add(tabcodevert);
+            pourtabcode.add(tabcodebleu);
+
+            JPanel pourtabcanonique=new JPanel(); //pour tables cano
+            JPanel tabcanorouge=new JPanel();
+            JPanel tabcanovert=new JPanel();
+            JPanel tabcanobleu=new JPanel();
+
+            tabcanorouge.add(AfficherTabCa.affichage(tableCanoRouge, "Rouge"));
+            tabcanorouge.add(AfficherTabCa.affichage(tableCanoRouge, "Vert"));
+            tabcanorouge.add(AfficherTabCa.affichage(tableCanoRouge, "Bleu"));
+            pourtabcanonique.add(new JLabel("Tables canoniques de l'image"));
+            pourtabcanonique.add(tabcanorouge);
+            pourtabcanonique.add(tabcanovert);
+            pourtabcanonique.add(tabcanobleu);
+
+            JTabbedPane onglets = new JTabbedPane(); //cree les onglets pour chacune des types de tables
+            onglets.add("Image", pourimage);
+            onglets.add("Frequences", pourtabfreq);
+            onglets.add("Codes", pourtabcode);
+            onglets.add("Canoniques", pourtabcanonique);
+
+            frame.setLayout(new BorderLayout());
+            frame.add(onglets);
+
+            frame.pack(); // adapte la fenêtre au contenu
+            frame.setLocationRelativeTo(null); // centre la fenêtre
             frame.setVisible(true);
-
     }
 }
 

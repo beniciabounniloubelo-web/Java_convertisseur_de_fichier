@@ -1,4 +1,4 @@
-package frequence;
+package rootfolder.frequence;
 
 import java.util.Map;
 import java.util.TreeMap;

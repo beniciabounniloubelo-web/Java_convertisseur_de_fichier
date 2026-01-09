@@ -1,4 +1,4 @@
-package arbre;
+package rootfolder.arbre;
 
 import java.util.Map;
 import java.util.HashMap;
@@ -6,7 +6,7 @@ import java.util.HashMap;
 public class ParcoursArbre{
 
     //etape 3: parcours de l'arbre et creation de la table de code
-    //methode iterative - DFS
+    //methode recurusive - usage de DFS
     public static void dfsRecursive (Noeud NoeudActuel, String actualCode, Map<Integer, String> tabCode) {
 
         if (NoeudActuel.getGauche() == null && NoeudActuel.getDroit() == null){

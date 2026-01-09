@@ -1,6 +1,6 @@
 package rootfolder; //indique le chemin de cette classe
 
-import arbre.*; //car on utilise ce qu'il y a cet endroit
+import rootfolder.arbre.*; //car on utilise ce qu'il y a cet endroit
 
 import java.lang.Comparable;
 import java.util.Queue;
