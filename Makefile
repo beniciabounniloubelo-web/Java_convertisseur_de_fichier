@@ -224,7 +224,7 @@ $(MAIN2_CLASS_NAME): $(SRC)/$(PKG)/ShowImage.java $(MAIN_DEPS2)
 
 # pour enlever le dossier build, le jar et la javadoc--------------------------------------------------------------
 clean:
-	rm -rf $(BUILD) $(JAR_NAME) doc ; clear
+	rm -rf $(BUILD) $(JAR_NAME) doc
 
 # execution--------------------------------------------------------------
 exec_showimage: all
@@ -238,7 +238,7 @@ javadoc:
 	javadoc -d doc -sourcepath $(SRC) -subpackages rootfolder -Xdoclint:none
 
 seedoc: 
-	firefox doc/index.html
+	@echo "Ouvrez doc/index.html dans votre navigateur"
 
 # executer le .jar--------------------------------------------------------------
 # Execute le JAR avec PrintImage comme classe principale
