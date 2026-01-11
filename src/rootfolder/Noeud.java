@@ -1,4 +1,4 @@
-package rootfolder.arbre;
+package rootfolder;
 
 import java.lang.Comparable;
 import java.util.Map;
