@@ -5,8 +5,6 @@ import java.util.TreeMap;
 import java.awt.image.*;
 import java.awt.Color;
 
-//on cree ici les 3 tables (qui vont etre return par la suite)
-
 /**
  * La classe TabFreq gere le calcul des frequences des composantes de couleur (rouge, vert, bleu)
  * d'une image donnee.

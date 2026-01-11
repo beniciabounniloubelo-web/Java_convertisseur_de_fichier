@@ -3,9 +3,6 @@ package rootfolder;
 import javax.swing.*;
 import java.util.Map;
 
-//gere affichage de la table de frequence
-
-
 /**
  * La classe AfficherTabCa gere l'affichage d'une table de codes canoniques sous forme de tableau graphique.
  * <p>

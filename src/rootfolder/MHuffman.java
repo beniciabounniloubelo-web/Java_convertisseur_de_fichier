@@ -1,4 +1,4 @@
-package rootfolder; //indique le chemin de cette classe
+package rootfolder;
 
 import java.lang.Comparable;
 import java.util.Queue;
