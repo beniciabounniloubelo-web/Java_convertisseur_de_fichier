@@ -1,3 +1,13 @@
+# FileConverter — Convertisseur de fichiers vers le format PIF
+
+Application de conversion de fichiers vers un format personnalisé PIF.  
+**Contenu :** import de fichiers · conversion vers le format PIF · export du résultat  
+**Stack :** Java
+
+> Projet académique — BUT Informatique
+
+
+
 # Commandes du Makefile
 
 Ce document decrit les principales commandes disponibles dans le `Makefile` du projet **Primitive Image Format**.
