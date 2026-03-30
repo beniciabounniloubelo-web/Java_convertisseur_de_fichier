@@ -3,6 +3,7 @@
 Application de conversion de fichiers vers un format personnalisé PIF.  
 **Contenu :** import de fichiers · conversion vers le format PIF · export du résultat  
 **Stack :** Java
+**Groupe**: en autonomie
 
 > Projet académique — BUT Informatique
 
